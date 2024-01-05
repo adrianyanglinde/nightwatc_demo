@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuites errors="0"
+            failures="1"
+            tests="1">
+
+  <testsuite name="test.uniReg"
+    errors="0" failures="1" hostname="" id="" package="uniReg" skipped="0"
+    tests="1" time="13.34" timestamp="">
+  
+    <testcase name="注册是否正常" classname="test.uniReg" time="6.668" assertions="4">
+
+    
+
+    
+
+      <failure message="Testing if element &lt;.login_module .stip strong&gt; contains text &#39;注册成功&#39; in 5000ms - expected &#34;contains text &#39;注册成功&#39;&#34; but got: &#34;element could not be located&#34; (5127ms)">    at DescribeInstance.&lt;anonymous&gt; (/Users/yanglinde/Documents/project/nightwatch_demo/test/uniReg.js:19:21)</failure>
+
+    
+    </testcase>
+  
+
+  
+
+    
+
+  
+  </testsuite>
+</testsuites>

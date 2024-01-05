@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuites errors="0"
+            failures="1"
+            tests="1">
+
+  <testsuite name="test.home"
+    errors="0" failures="1" hostname="" id="" package="home" skipped="0"
+    tests="1" time="44.77" timestamp="">
+  
+    <testcase name="页面访问是否正常" classname="test.home" time="22.38" assertions="3">
+
+    
+
+      <failure message="VRT hxjy complete in 5000ms - expected &#34;true&#34; but got: &#34;null&#34; (20487ms)">    at DescribeInstance.&lt;anonymous&gt; (/Users/yanglinde/Documents/project/nightwatch_demo/test/home.js:7:14)</failure>
+
+    
+    </testcase>
+  
+
+  
+
+    
+
+  
+  </testsuite>
+</testsuites>
