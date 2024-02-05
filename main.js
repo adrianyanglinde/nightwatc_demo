@@ -1,7 +1,9 @@
 const { app, BrowserWindow,BrowserView, ipcMain } = require('electron/main')
+const log = require('electron-log/main')
 const path = require('node:path')
 const util = require('util');
-const exec = util.promisify(require('child_process').exec);
+// const exec = util.promisify(require('child_process').exec);
+const { exec } = require('child_process');
 
 try {
   require('electron-reloader')(module);
@@ -11,12 +13,12 @@ try {
 // Create the browser window.
 const createWindow = () => {
   const win = new BrowserWindow({
-    width: 1200,
-    height: 600,
+    width: 1600,
+    height: 800,
     webPreferences: {
       preload: path.join(__dirname, './render/preload.js'),
-      // nodeIntegration: true,
-      // contextIsolation: false
+      nodeIntegration: true,
+      contextIsolation: false
     }
   })
 
@@ -25,18 +27,28 @@ const createWindow = () => {
 
   const view = new BrowserView()
   win.setBrowserView(view)
-  view.setBounds({ x: 0, y: 0, width: 300, height: 300 })
-  view.webContents.loadFile('tests_output\nightwatch-html-report\index.html')
+  view.setBounds({ x: 0, y: 300, width: 1600, height: 800 })
+  view.webContents.loadFile('tests_output/nightwatch-html-report/index.html')
 }
 
-const handleExecCommand = async (event, command) => {
-  try {
-    const { stdout, stderr } = await exec(command);
-    console.log('stdout:', stdout);
-    console.log('stderr:', stderr);
-  } catch (e) {
-    console.error(e);
-  }
+const handleExecCommand = (event, command) => {
+  log.debug('handleExecCommand');
+  exec(command, (error, stdout, stderr) => {
+    if (error) {
+      log.error(`exec error: ${error}`);
+      return;
+    }
+    log.debug(`stdout: ${stdout}`);
+    log.debug(`stderr: ${stderr}`);
+  });
+  // try {
+  //   const { stdout, stderr } = await exec(command);
+  //   log.debug('stdout:', stdout);
+  //   log.debug('stderr:', stderr);
+  //   return { stdout, stderr }
+  // } catch (e) {
+  //   log.error('ExecCommand err :',e);
+  // }
 }
 
 // 这段程序将会在 Electron 结束初始化

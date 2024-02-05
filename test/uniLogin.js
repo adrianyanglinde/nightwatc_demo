@@ -1,7 +1,7 @@
 const games = require('../games');
 describe('登录测试', function () {
     beforeEach(async (browser) => {
-        browser.navigateTo(games[2].home_url).waitForElementVisible('body').findLoginDiv();
+        browser.navigateTo(games[1].home_url).waitForElementVisible('body').findLoginDiv();
     });
 
     it('数字字母混合账号登录是否正常', function (browser) {

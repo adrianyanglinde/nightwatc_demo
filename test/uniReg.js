@@ -1,7 +1,7 @@
 const games = require('../games');
 describe('注册测试', function () {
     beforeEach(async (browser) => {
-        browser.navigateTo(games[2].home_url).waitForElementVisible('body').findLoginDiv();
+        browser.navigateTo(games[1].home_url).waitForElementVisible('body').findLoginDiv();
     });
 
     it('真实身份证注册是否正常', function (browser) {
@@ -16,6 +16,7 @@ describe('注册测试', function () {
             .setValue('input[id=j-idcard]', browser.globals.real_idcard)
             .click('input[id="reg_eula_agree"]')
             .click('input[type=submit]')
+            .waitForElementPresent('.login_module')
             .assert.textContains('.login_module .stip strong', '注册成功')
             .frameParent();
     });

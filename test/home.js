@@ -6,7 +6,7 @@ describe('官网测试', function () {
         browser.assert
             .screenshotIdenticalToBaseline(
                 'body',
-                /* Optional */ 'hxjy',
+                /* Optional */ games[1].key,
                 { threshold: 0.5 },
                 'VRT hxjy complete.'
             )
