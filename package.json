@@ -1,15 +1,29 @@
 {
   "name": "nightwatch_demo",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "electron nightwatch e2e webgame",
+  "main": "main.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "electron-forge start",
+    "package": "electron-forge package",
+    "make": "electron-forge make"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "4399ued",
+  "license": "MIT",
   "devDependencies": {
+    "@electron-forge/cli": "^7.2.0",
+    "@electron-forge/maker-deb": "^7.2.0",
+    "@electron-forge/maker-rpm": "^7.2.0",
+    "@electron-forge/maker-squirrel": "^7.2.0",
+    "@electron-forge/maker-zip": "^7.2.0",
+    "@electron-forge/plugin-auto-unpack-natives": "^7.2.0",
     "@nightwatch/vrt": "^3.1.0",
+    "electron": "^28.2.1",
+    "electron-reloader": "^1.2.3",
     "nightwatch": "^3.3.6"
+  },
+  "dependencies": {
+    "electron-squirrel-startup": "^1.0.0"
   }
 }

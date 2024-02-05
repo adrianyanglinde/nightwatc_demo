@@ -141,7 +141,23 @@ module.exports = {
                     // --verbose
                 ]
             }
-        }
+        },
+
+        // ie: {
+        //     desiredCapabilities: {
+        //         browserName: 'internet explorer',
+        //     },
+
+        //     webdriver: {
+        //         start_process: true,
+        //         // Follow https://docs.microsoft.com/en-us/microsoft-edge/webdriver-chromium/?tabs=c-sharp#download-microsoft-edge-webdriver
+        //         // to download the Edge WebDriver and set the location of extracted `msedgedriver` below:
+        //         server_path: 'localhost:5555',
+        //         cli_args: [
+        //             // --verbose
+        //         ]
+        //     }
+        // }
     },
 
     '@nightwatch/vrt': {
