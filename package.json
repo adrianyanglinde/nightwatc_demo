@@ -7,7 +7,9 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "electron-forge start",
     "package": "electron-forge package",
-    "make": "electron-forge make"
+    "make": "electron-forge make",
+    "nightwatch": "npx nightwatch ./nightwatch/webgame/uniLogin.js --env=chrome --reuse-browse",
+    "nightwatch2": "npx nightwatch ./nightwatch/webgame/uniReg.js --env=firefox --reuse-browse"
   },
   "author": "4399ued",
   "license": "MIT",
@@ -27,4 +29,5 @@
     "electron-log": "^5.1.1",
     "electron-squirrel-startup": "^1.0.0"
   }
+  
 }

@@ -1,4 +1,4 @@
-const { app, BrowserWindow,BrowserView, ipcMain } = require('electron/main')
+const { app, BrowserWindow, BrowserView, ipcMain } = require('electron/main')
 const log = require('electron-log/main')
 const path = require('node:path')
 const util = require('util');
@@ -17,8 +17,8 @@ const createWindow = () => {
     height: 800,
     webPreferences: {
       preload: path.join(__dirname, './render/preload.js'),
-      nodeIntegration: true,
-      contextIsolation: false
+      // nodeIntegration: true,
+      // contextIsolation: false
     }
   })
 
@@ -33,7 +33,10 @@ const createWindow = () => {
 
 const handleExecCommand = (event, command) => {
   log.debug('handleExecCommand');
-  exec(command, (error, stdout, stderr) => {
+  const path2 = path.join(app.getAppPath(), './nightwatch/webgame/uniLogin.js');
+  const cmd = `npx nightwatch ${path2} --env=chrome --reuse-browse`;
+  const cmd2 = `npm run nightwatch`;
+  exec(cmd2, (error, stdout, stderr) => {
     if (error) {
       log.error(`exec error: ${error}`);
       return;
@@ -41,14 +44,6 @@ const handleExecCommand = (event, command) => {
     log.debug(`stdout: ${stdout}`);
     log.debug(`stderr: ${stderr}`);
   });
-  // try {
-  //   const { stdout, stderr } = await exec(command);
-  //   log.debug('stdout:', stdout);
-  //   log.debug('stderr:', stderr);
-  //   return { stdout, stderr }
-  // } catch (e) {
-  //   log.error('ExecCommand err :',e);
-  // }
 }
 
 // 这段程序将会在 Electron 结束初始化
