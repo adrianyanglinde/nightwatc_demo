@@ -8,8 +8,7 @@
     "start": "electron-forge start",
     "package": "electron-forge package",
     "make": "electron-forge make",
-    "nightwatch": "npx nightwatch ./nightwatch/webgame/uniLogin.js --env=chrome --reuse-browse",
-    "nightwatch2": "npx nightwatch ./nightwatch/webgame/uniReg.js --env=firefox --reuse-browse"
+    "nightwatch": "npx nightwatch ./nightwatch/webgame/uniLogin.js --env=firefox --reuse-browse"
   },
   "author": "4399ued",
   "license": "MIT",
@@ -20,14 +19,13 @@
     "@electron-forge/maker-squirrel": "^7.2.0",
     "@electron-forge/maker-zip": "^7.2.0",
     "@electron-forge/plugin-auto-unpack-natives": "^7.2.0",
-    "@nightwatch/vrt": "^3.1.0",
     "electron": "^28.2.1",
-    "electron-reloader": "^1.2.3",
-    "nightwatch": "^3.3.6"
+    "electron-reloader": "^1.2.3"
   },
   "dependencies": {
+    "@nightwatch/vrt": "^3.1.0",
     "electron-log": "^5.1.1",
-    "electron-squirrel-startup": "^1.0.0"
+    "electron-squirrel-startup": "^1.0.0",
+    "nightwatch": "^3.3.6"
   }
-  
 }
