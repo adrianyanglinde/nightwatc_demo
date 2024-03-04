@@ -1,9 +1,8 @@
 const { app, BrowserWindow, BrowserView, ipcMain } = require('electron/main')
 const log = require('electron-log/main')
 const path = require('node:path')
-const util = require('util');
-// const exec = util.promisify(require('child_process').exec);
-const { exec ,execFile} = require('child_process');
+const { exec ,fork} = require('child_process');
+const _ = require('lodash');
 
 try {
   require('electron-reloader')(module);
@@ -22,10 +21,8 @@ const createWindow = () => {
       // contextIsolation: false
     }
   })
-
   win.loadFile('index.html')
   win.webContents.openDevTools()
-
   // const view = new BrowserView()
   // win.setBrowserView(view)
   // view.setBounds({ x: 0, y: 300, width: 1600, height: 800 })
@@ -33,22 +30,39 @@ const createWindow = () => {
 }
 
 
-const handleExecCommand = (event, command) => {
-  const exePath = path.join(__dirname,'./node_modules/nightwatch/bin/runner.js');
-  const filePath = path.join(app.getAppPath(),'./nightwatch/webgame/uniLogin.js');
-  const cmd = `node ${exePath} ${filePath} --env=firefox --reuse-browse`;
+const testPathConfig = {
+  login : path.join(app.getAppPath(),'./nightwatch/webgame/uniLogin.js'),
+  reg : path.join(app.getAppPath(),'./nightwatch/webgame/uniReg.js')
+};
+
+const handleExecNightwatch = (event, params) => {
+  const  { 
+    games , 
+    tests = _.keys(testPathConfig),
+    browsers = ['chrome','firefox','edge'].splice(0,1) 
+  } = params;
+  const modulePath = path.join(app.getAppPath(),'./node_modules/nightwatch/bin/runner.js');
+  const testPaths = _.values(_.pick(testPathConfig, tests));
   const options = {
     cwd: path.join(app.getAppPath())
   };
-  log.debug(`cmd: ${cmd}`);
-  exec(cmd,options,(error, stdout, stderr) => {
-    if (error) {
-      log.error(`exec error: ${error}`);
-      return;
-    }
-    log.debug(`stdout: ${stdout}`);
-    log.debug(`stderr: ${stderr}`);
+  try {
+    const child = fork(modulePath,[...testPaths,`--env=${browsers.join()}`,"--reuse-browse"],options);
+    child.on('message', message => {
+      console.log('父进程接收到消息:', message);
   });
+  } catch (error) {
+    log.error(`fork error: ${error}`);
+  }
+  // const cmd = `node ${modulePath} ${filePath.login} --env=firefox --reuse-browse`;
+  // exec(cmd,options,(error, stdout, stderr) => {
+  //   if (error) {
+  //     log.error(`exec error: ${error}`);
+  //     return;
+  //   }
+  //   log.debug(`stdout: ${stdout}`);
+  //   log.debug(`stderr: ${stderr}`);
+  // });
 }
 
 // 这段程序将会在 Electron 结束初始化
@@ -58,7 +72,7 @@ app.whenReady().then(() => {
   
   createWindow()
 
-  ipcMain.handle('exec-command', handleExecCommand)
+  ipcMain.handle('exec-nightwatch', handleExecNightwatch)
   
   app.on('activate', () => {
     // 在 macOS 系统内, 如果没有已开启的应用窗口

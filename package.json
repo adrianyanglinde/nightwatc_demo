@@ -8,7 +8,7 @@
     "start": "electron-forge start",
     "package": "electron-forge package",
     "make": "electron-forge make",
-    "nightwatch": "npx nightwatch ./nightwatch/webgame/uniLogin.js --env=firefox --reuse-browse"
+    "nightwatch": "npx nightwatch ./nightwatch/webgame/uniLogin.js --env=yxqjz_firefox --reuse-browse"
   },
   "author": "4399ued",
   "license": "MIT",
@@ -26,6 +26,7 @@
     "@nightwatch/vrt": "^3.1.0",
     "electron-log": "^5.1.1",
     "electron-squirrel-startup": "^1.0.0",
+    "lodash": "^4.17.21",
     "nightwatch": "^3.3.6"
   }
 }

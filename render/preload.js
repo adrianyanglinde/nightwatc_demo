@@ -1,7 +1,7 @@
 const { contextBridge, ipcRenderer } = require('electron')
 
-contextBridge.exposeInMainWorld('electronAPI', {
-  execCommand: (command) => ipcRenderer.invoke('exec-command', command)
+contextBridge.exposeInMainWorld('CtxBridge', {
+  execNightwatch: (command) => ipcRenderer.invoke('exec-nightwatch', command)
 })
 
 window.addEventListener('DOMContentLoaded', () => {

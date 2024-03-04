@@ -1,12 +1,12 @@
-const games = require('./games');
+
 describe('官网测试', function () {
-    beforeEach((browser) => browser.navigateTo(games[1].home_url));
+    beforeEach((browser) => browser.navigateTo(browser.globals.game_home_url));
 
     it('页面访问是否正常', function (browser) {
         browser.assert
             .screenshotIdenticalToBaseline(
                 'body',
-                /* Optional */ games[1].key,
+                /* Optional */ browser.globals.game_key,
                 { threshold: 0.5 },
                 'VRT hxjy complete.'
             )
